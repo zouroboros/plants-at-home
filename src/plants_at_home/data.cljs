@@ -14,3 +14,6 @@
       :error-handler (fn [e] (put! out e)) }))
 
 (defn plants [db] (filter some? (set (map (fn [row] row.Item) db.data))))
+
+(defn countries [db plant] (set (map (fn [row] row.Area)
+  (filter (fn [row] (= row.Item plant)) db.data))))

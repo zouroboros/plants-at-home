@@ -54,8 +54,8 @@
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/plants_at_home.js"
                            :main plants-at-home.core
-                           :optimizations :advanced
-                           :pretty-print false}}]}
+                           :optimizations :simple
+                           :pretty-print true}}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
