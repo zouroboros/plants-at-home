@@ -15,7 +15,10 @@
   (data/loadData data-channel)
   (go (let [db (<! data-channel)] (swap! plants-at-home.ui.app-state assoc
     :plants (data/plants db))
-  (go (while true (let [plant (<! ui-channel)] (put! map-channel (data/countries db plant))))))))
+  (go (while true (let [plant (<! ui-channel)
+    countries (data/countries db plant)]
+      (println countries)
+      (put! map-channel countries)))))))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

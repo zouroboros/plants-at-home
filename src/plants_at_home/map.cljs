@@ -39,9 +39,6 @@
 (defn mark-countries [map geo-json countries]
   (if (.getLength (.getLayers map) > 1)
   (.removeLayer map (.item (.getLayers map) 1)))
-  (js/console.log (clj->js countries))
-  (js/console.log (clj->js geo-json))
-  (js/console.log (clj->js (prepare-geojson countries geo-json)))
   (.addLayer map (source-vector (prepare-geojson countries geo-json))))
 
 (defn init-map [channel] (GET "countries.json" {
