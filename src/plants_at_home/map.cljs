@@ -20,7 +20,7 @@
 
 (defn omap [] (ol.Map. (js-obj "target" "map-container"
   "layers" (array (ol.layer.Tile. (js-obj "source" (ol.source.OSM.))))
-  "view" (ol.View. (js-obj "center" (ol.proj.fromLonLat (array 0 0)) "zoom" 4)))))
+  "view" (ol.View. (js-obj "center" (ol.proj.fromLonLat (array 0 0)) "zoom" 2)))))
 
 (defonce polygon-style (ol.style.Style.
   (js-obj "stroke" (ol.style.Stroke. (js-obj "color" "red"))
