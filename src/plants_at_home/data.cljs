@@ -6,14 +6,17 @@
 
 (defn parseCsv [csv] (js/Papa.parse csv (js-obj "header" true)))
 
+
+(defn initDb [csvObj] (filter (fn [row] (> row.Value 0)) csvObj.data))
+
 (defn handleError [e] ())
 
 (defn loadData [out]
   (GET "FAOSTAT_data_3-16-2017.csv" {
-      :handler (fn [r] (put! out (parseCsv r)))
+      :handler (fn [r] (put! out (initDb (parseCsv r))))
       :error-handler (fn [e] (put! out e)) }))
 
-(defn plants [db] (filter some? (set (map (fn [row] row.Item) db.data))))
+(defn plants [db] (filter some? (set (map (fn [row] row.Item) db))))
 
 (defn countries [db plant] (set (map (fn [row] row.Area)
-  (filter (fn [row] (= row.Item plant)) db.data))))
+  (filter (fn [row] (= row.Item plant)) db))))
