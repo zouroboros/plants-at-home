@@ -6,7 +6,7 @@
 (def app-state (atom {:plants nil}))
 
 (defn plant-list-item [channel plant]
-  (om/component (dom/li #js {:onClick (fn [e] (put! channel plant))} plant)))
+  (om/component (dom/li nil (dom/a #js {:href (str "#" plant)} plant))))
 
 (defn plant-list [channel plants]
       (om/component (dom/div nil (dom/h1 nil "Plants")
@@ -18,10 +18,14 @@
     (render [this]
       (dom/h1 nil "Loading data"))))
 
-(defn show [channel]
+(defn read-url-hash [channel] (let [plant (js/decodeURIComponent (subs js/document.location.hash 1))] (put! channel plant)))
+
+(defn init-ui [channel]
   (om/root
     (fn [data owner]
       (reify om/IRender
         (render [_] (if (nil? (:plants data)) (om/build wait-view nil) (om/build (partial plant-list channel) (:plants data))))))
     app-state
-    {:target (. js/document (getElementById "app"))}))
+    {:target (. js/document (getElementById "app"))})
+  (. js/window (addEventListener "hashchange" (fn [e] (read-url-hash channel))))
+  (if (nil? js.document.location.hash) () (read-url-hash channel)))

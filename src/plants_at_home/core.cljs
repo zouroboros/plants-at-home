@@ -7,11 +7,13 @@
 
 (enable-console-print!)
 
+;;(. js/window (addEventListener "hashchange" (fn [e] (print js/document.location.hash))))
+
 (let [data-channel (chan)
       ui-channel (chan)
       map-channel (chan)]
   (map/init-map map-channel)
-  (ui/show ui-channel)
+  (ui/init-ui ui-channel)
   (data/loadData data-channel)
   (go (let [db (<! data-channel)] (swap! plants-at-home.ui.app-state assoc
     :plants (data/plants db))
