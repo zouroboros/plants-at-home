@@ -16,7 +16,7 @@
       :handler (fn [r] (put! out (initDb (parseCsv r))))
       :error-handler (fn [e] (put! out e)) }))
 
-(defn plants [db] (filter some? (set (map (fn [row] row.Item) db))))
+(defn plants [db] (filter some? (apply sorted-set (map (fn [row] row.Item) db))))
 
 (defn countries [db plant] (set (map (fn [row] row.Area)
   (filter (fn [row] (= row.Item plant)) db))))
