@@ -9,7 +9,7 @@
   (om/component (dom/li #js {:onClick (fn [e] (put! channel plant))} plant)))
 
 (defn plant-list [channel plants]
-      (om/component (dom/div nil (dom/h1 nil "Plant list")
+      (om/component (dom/div nil (dom/h1 nil "Plants")
         (apply dom/ul nil (om/build-all (partial plant-list-item channel) plants)))))
 
 (defn wait-view []

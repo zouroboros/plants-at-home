@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-  margin: 0 2rem;
+  margin: 0 0;
 }
 
 #page {
@@ -13,12 +13,23 @@ body {
 }
 #app {
   max-width: 25%;
-  overflow: scroll;
+  overflow: auto;
   max-height: 100vh;
   flex-grow: 1;
+  padding-left: 1rem;
 }
 
 #map {
   max-width: 75%;
   flex-grow: 1;
+  height: 80vh;
+}
+
+#map-container {
+  width: 100%;
+  height: 100%;
+}
+
+#map-text {
+  padding: 1rem;
 }
