@@ -23,8 +23,8 @@
   "view" (ol.View. (js-obj "center" (ol.proj.fromLonLat (array 0 0)) "zoom" 2)))))
 
 (defonce polygon-style (ol.style.Style.
-  (js-obj "stroke" (ol.style.Stroke. (js-obj "color" "red"))
-   "fill" (ol.style.Fill. (js-obj "color" "red")))))
+  (js-obj "stroke" (ol.style.Stroke. (js-obj "color" "white"))
+   "fill" (ol.style.Fill. (js-obj "color" "rgba(0, 120, 255, 0.3)")))))
 
 (defn source-vector [geo-json]
   (let [features (.readFeatures (ol.format.GeoJSON.) (clj->js geo-json) (js-obj "featureProjection" "EPSG:3857"))

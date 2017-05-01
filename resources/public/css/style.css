@@ -52,5 +52,5 @@ body {
 }
 
 .plant-list li a.current {
-  background-color: blue;
+  background-color: rgba(0, 120, 255, 0.5);
 }
