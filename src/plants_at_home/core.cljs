@@ -19,8 +19,8 @@
     :plants (data/plants db))
   (go (while true (let [plant (<! ui-channel)
     countries (data/countries db plant)]
-      (println countries)
-      (put! map-channel countries)))))))
+      (put! map-channel countries)
+      (swap! ui/app-state assoc :current-plant plant)))))))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

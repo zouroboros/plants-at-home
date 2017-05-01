@@ -16,7 +16,6 @@ body {
   overflow: auto;
   max-height: 100vh;
   flex-grow: 1;
-  padding-left: 1rem;
 }
 
 #map {
@@ -32,4 +31,26 @@ body {
 
 #map-text {
   padding: 1rem;
+}
+
+.plant-list {
+  list-style: none;
+  padding: 0;
+}
+
+.plant-list li {
+}
+
+.plant-list li a {
+  display: block;
+  padding: 0.5rem;
+  margin: 0.2rem 0;
+  text-align: center;
+  background-color: rgb(94, 185, 94);
+  text-decoration: none;
+  color: white;
+}
+
+.plant-list li a.current {
+  background-color: blue;
 }
