@@ -1,5 +1,6 @@
 language: clojure
 script:
+  - lein upgrade
   - lein cljsbuild once min
 deploy:
   provider: pages
