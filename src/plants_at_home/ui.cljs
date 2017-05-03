@@ -16,7 +16,15 @@
   (reify om/IRenderState
     (render-state [this {:keys [search]}]
       (dom/div #js {:className "search-box"}
-        (dom/input #js {:type "text" :onChange (fn [e] (put! search (.. e -target -value)))})))))
+        (dom/input #js {:type "text" :placeholder "type to search e.g: mango"
+          :onChange (fn [e] (put! search (.. e -target -value)))})))))
+
+(defn filter-plants [plants search]
+  (filter (fn [plant]
+    (string/includes?
+      (string/lower-case plant)
+      (string/lower-case search)))
+    plants))
 
 (defn plant-list [data owner]
   (reify
@@ -28,14 +36,16 @@
         (let [search-c (om/get-state owner :search-c)]
         (go (loop []
              (let [search (<! search-c)]
-               (om/set-state! owner :current-plants (filter (fn [plant] (string/includes? plant search)) (:plants data)))
+               (om/set-state! owner :current-plants
+                 (filter-plants (:plants data) search))
                (recur))))))
      om/IRenderState
      (render-state [this {:keys [search-c current-plants]}]
        (dom/div nil
-       (om/build plant-search () {:init-state {:search search-c}})
-       (apply dom/ul #js {:className "plant-list"}
-         (om/build-all (partial plant-list-item (:current-plant data)) current-plants))))))
+         (om/build plant-search () {:init-state {:search search-c}})
+         (apply dom/ul #js {:className "plant-list"}
+           (om/build-all (partial plant-list-item (:current-plant data))
+              current-plants))))))
 
 
 (defn wait-view []
